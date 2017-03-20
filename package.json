@@ -8,6 +8,8 @@
   "dependencies": {
     "@cycle/dom": "^16.0.0",
     "@cycle/run": "^3.0.0",
+    "babel-plugin-transform-react-jsx": "^6.23.0",
+    "snabbdom-jsx": "^0.3.1",
     "xstream": "^10.3.0"
   },
   "scripts": {
