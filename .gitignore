@@ -1,0 +1,9 @@
+build
+node_modules
+dist
+coverage
+.*.swp
+.env
+npm-debug.log
+.DS_Store
+.*.map
