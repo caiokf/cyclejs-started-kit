@@ -1,14 +1,18 @@
 import xs from 'xstream';
 import {html} from 'snabbdom-jsx';
+import Header from './components/header';
 
 export function App (sources) {
-  const sinks = {
-    DOM: xs.of(
+  const header$ = Header(sources).DOM;
+
+  return {
+    DOM: header$.map((header) =>
       <div>
-        My Awesome Cycle.js app
+        {header}
+        <div>
+          My Awesome Cycle.js app
+        </div>
       </div>
     ),
   };
-
-  return sinks;
 }
