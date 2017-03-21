@@ -6,6 +6,7 @@ var gutil = require("gulp-util");
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
 var stream = require('webpack-stream');
+const mocha = require('gulp-mocha');
 
 var webpackConfig = require("./webpack.config.js");
 
@@ -39,6 +40,16 @@ gulp.task('webpack', [], function() {
     .pipe(uglify())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(path.DEST));
+});
+
+gulp.task('spec', function() {
+  gulp
+    .src(['src/**/*.spec.js'], { read: false })
+    .pipe(mocha({
+      reporter: 'nyan',
+      require: 'babel-register',
+      colors: true
+    }))
 });
 
 gulp.task('default', ['webpack-dev-server']);
