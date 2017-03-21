@@ -3,7 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "cycle-scripts": "1.1.0"
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-register": "^6.24.0",
+    "cycle-scripts": "1.1.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-uglify": "^2.1.1",
+    "gulp-util": "^3.0.8",
+    "progress-bar-webpack-plugin": "^1.9.3",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.2",
+    "webpack-stream": "^3.2.0"
   },
   "dependencies": {
     "@cycle/dom": "^16.0.0",
@@ -13,14 +26,9 @@
     "xstream": "^10.3.0"
   },
   "scripts": {
-    "start": "cycle-scripts start",
+    "start": "gulp",
     "test": "cycle-scripts test",
     "build": "cycle-scripts build",
     "eject": "cycle-scripts eject"
-  },
-  "babel": {
-    "presets": [
-      "es2015"
-    ]
   }
 }
