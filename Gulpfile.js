@@ -2,13 +2,20 @@ const gulp = require('gulp');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const sourcemaps = require('gulp-sourcemaps');
-const gutil = require("gulp-util");
-const webpack = require("webpack");
-const WebpackDevServer = require("webpack-dev-server");
+const gutil = require('gulp-util');
+const eslint = require('gulp-eslint');
+const webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
 const stream = require('webpack-stream');
 const mocha = require('gulp-mocha');
 
-const webpackConfig = require("./webpack.config.js");
+const webpackConfig = require('./webpack.config.js');
+
+const path = {
+  SRC: 'src/**/*.js',
+  SPECS: 'src/**/*.spec.js',
+  DIST_DIR: 'dist/build',
+};
 
 gulp.task("webpack-dev-server", (callback) => {
   const compiler = webpack(webpackConfig.config);
@@ -28,28 +35,33 @@ gulp.task("webpack-dev-server", (callback) => {
 });
 
 gulp.task('webpack', [], () => {
-  const path = {
-    ALL: ['src/**/*.js'],
-    DEST: 'dist/build',
-  };
-
   return gulp
-    .src(path.ALL)
+    .src(path.SRC)
     .pipe(sourcemaps.init())
     .pipe(stream(webpackConfig.config))
     .pipe(uglify())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(path.DEST));
+    .pipe(gulp.dest(path.DIST_DIR));
 });
 
 gulp.task('spec', () => {
-  gulp
-    .src(['src/**/*.spec.js'], { read: false })
+  return gulp
+    .src([path.SPECS], { read: false })
     .pipe(mocha({
       reporter: 'nyan',
       require: 'babel-register',
       colors: true
     }));
+});
+
+gulp.task('eslint', () => {
+  return gulp
+    .src([path.SRC, '!' + path.SPECS])
+    .pipe(eslint({
+      configFile: './.eslintrc.js'
+    }))
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
 gulp.task('default', ['webpack-dev-server']);
