@@ -22,10 +22,23 @@ module.exports = {
         {
           test: /\.js$/,
           loader: 'babel-loader',
-          query: {
-            presets: ['es2015']
-          },
+          query: { presets: ['es2015'] },
           exclude: /node_modules/
+        },
+        {
+          test: /\.json$/, loader: "json"
+        },
+        {
+          test: /\.scss$/,
+          use: [
+            { loader: "style-loader" },
+            { loader: "css-loader" },
+            { loader: "sass-loader" }
+          ]
+        },
+        {
+          test: /\.html$/,
+          loader: 'raw'
         }
       ]
     },

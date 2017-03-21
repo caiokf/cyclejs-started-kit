@@ -1,11 +1,10 @@
 import {run} from '@cycle/run';
 import {makeDOMDriver} from '@cycle/dom';
 import {App} from './app';
-
-const main = App;
+import './styles/index.scss';
 
 const drivers = {
   DOM: makeDOMDriver('#app'),
 };
 
-return run(main, drivers);
+const app = run(App, drivers);
