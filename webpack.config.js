@@ -1,8 +1,8 @@
-var webpack = require('webpack');
-var ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const webpack = require('webpack');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
-var host = 'http://localhost';
-var port = 8888;
+const host = 'http://localhost';
+const port = 8888;
 
 module.exports = {
   port: port,
